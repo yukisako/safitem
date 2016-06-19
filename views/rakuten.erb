@@ -1,0 +1,5 @@
+<% if @items %>
+  <% @items.first(10).each do |item| %>
+    <p><%= "#{item['itemName']}, #{item.price} yen" %></p>
+  <% end %>
+<% end %>

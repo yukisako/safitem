@@ -3,6 +3,7 @@ Bundler.require
 require 'sinatra/reloader' if development?
 require 'open-uri'
 require 'sinatra/json'
+require 'rakuten_web_service'
 
 enable :sessions
 
@@ -51,4 +52,12 @@ end
 get '/signout' do
   session[:shelter] = nil
   redirect '/'
+end
+
+
+#とりあえず楽天apiのテスト
+get '/rakuten' do
+  @items = RakutenWebService::Ichiba::Item.search(:keyword => 'Ruby')
+  p @items.first
+  erb :rakuten
 end
