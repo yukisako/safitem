@@ -11,3 +11,5 @@ gem 'cloudinary'
 gem 'dotenv'
 
 gem 'sqlite3'
+
+gem 'bcrypt'
