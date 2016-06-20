@@ -58,6 +58,10 @@ end
 #とりあえず楽天apiのテスト
 get '/rakuten' do
   @items = RakutenWebService::Ichiba::Item.search(:keyword => 'Ruby')
-  p @items.first
+  erb :rakuten
+end
+
+post '/search' do
+  @items = RakutenWebService::Ichiba::Item.search(:keyword => params[:item_name])
   erb :rakuten
 end
