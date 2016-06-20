@@ -13,3 +13,4 @@ gem 'dotenv'
 gem 'sqlite3'
 
 gem 'bcrypt'
+gem 'rakuten_web_service'

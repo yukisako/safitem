@@ -1,0 +1,13 @@
+<% if @items %>
+  <% @items.first(10).each do |item| %>
+    <p><%= item['itemName']%></p>
+    <% unless item['mediumImageUrls'].empty? %>
+      <img src="<%= item['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '?_ex=300x300')%>">
+      <% else %>
+        <p>no image</p>
+        <!-- ここにイメージない時の画像貼る -->
+      <% end %>
+    <p><%= item.price %>円</p>
+    <hr>
+  <% end %>
+<% end %>
