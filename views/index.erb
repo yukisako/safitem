@@ -13,6 +13,8 @@
     <h2><%= Shelter.find(session[:shelter]).shelter_name %>としてログイン</h2>
     <%= erb :search %>
   <% end %>
+
+  <a href="/show/shelters">現在登録されている避難所の一覧</a>
   
 </body>
 </html>

@@ -1,0 +1,10 @@
+<h1>登録されている避難所一覧</h1>
+
+<% @shelters.each do |shelter| %>
+  <p>避難所名: <%= shelter.shelter_name %></p>
+  <p>住所: <%= shelter.home_adress %></p>
+  <p>メールアドレス <%= shelter.email %></p>
+  <p>電話番号 <%= shelter.phone %></p>
+  <p>代表者名 <%= shelter.representative_name %></p>
+  <hr>
+<% end %>

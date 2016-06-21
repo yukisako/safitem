@@ -21,6 +21,12 @@ get '/signup' do
   erb :sign_up
 end
 
+get '/show/shelters' do
+  @shelters = Shelter.all
+  erb :show_shelters
+end
+
+
 post '/signup' do
   @shelter = Shelter.create({
     email: params[:email],
@@ -53,6 +59,7 @@ get '/signout' do
   session[:shelter] = nil
   redirect '/'
 end
+
 
 
 #とりあえず楽天apiのテスト
