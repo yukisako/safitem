@@ -63,5 +63,10 @@ end
 
 post '/search' do
   @items = RakutenWebService::Ichiba::Item.search(:keyword => params[:item_name])
+
+  @shelter = Shelter.find(session[:shelter])
+  item = @items.first
+  p @shelter
+  @shelter.items.create(name: item['itemName'], price: item.price, image_url: item['mediumImageUrls'].first['imageUrl'])
   erb :rakuten
 end
