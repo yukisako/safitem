@@ -26,6 +26,13 @@ get '/show/shelters' do
   erb :show_shelters
 end
 
+get '/shelter_items/:id' do
+  @shelter = Shelter.find(params[:id])
+
+  @shelter_items = @shelter.items.all
+
+  erb :shelter_items_list
+end
 
 post '/signup' do
   @shelter = Shelter.create({
