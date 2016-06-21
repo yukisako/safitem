@@ -8,6 +8,13 @@
         <!-- ここにイメージない時の画像貼る -->
       <% end %>
     <p><%= item.price %>円</p>
+    <form action="add_want" method="post">
+      <%# hiddenを使うよりいい方法ありそう %>
+      <input type="hidden" name="name" value="<%= item['itemName']%>" />
+      <input type="hidden" name="place" value="<%= item.price %>" />
+      <input type="hidden" name="image_url" value="<%= item['mediumImageUrls'].first['imageUrl'] %>" />
+      <input type="submit" value="不足中" >
+    </form>
     <hr>
   <% end %>
 <% end %>

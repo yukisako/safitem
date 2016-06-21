@@ -57,16 +57,28 @@ end
 
 #とりあえず楽天apiのテスト
 get '/rakuten' do
-  @items = RakutenWebService::Ichiba::Item.search(:keyword => 'Ruby')
-  erb :rakuten
+  @shelter = Shelter.find(session[:shelter])
+
+  @items = Item.all
+
+  @shelter_items = @shelter.items.all
+
+
+  erb :show
 end
+
+
 
 post '/search' do
   @items = RakutenWebService::Ichiba::Item.search(:keyword => params[:item_name])
-
-  @shelter = Shelter.find(session[:shelter])
-  item = @items.first
-  p @shelter
-  @shelter.items.create(name: item['itemName'], price: item.price, image_url: item['mediumImageUrls'].first['imageUrl'])
   erb :rakuten
 end
+
+post '/add_want' do
+  @shelter = Shelter.find(session[:shelter])
+  @shelter.items.create(name: params[:name], price: params[:place], image_url: params[:image_url])
+
+  redirect '/rakuten'
+end
+
+
