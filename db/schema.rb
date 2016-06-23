@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20160620153054) do
     t.datetime "updated_at", null: false
     t.string   "price"
     t.string   "image_url"
+    t.string   "item_code"
   end
 
   create_table "shelter_items", force: :cascade do |t|

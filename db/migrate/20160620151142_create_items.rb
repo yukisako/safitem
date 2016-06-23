@@ -5,6 +5,7 @@ class CreateItems < ActiveRecord::Migration
       t.timestamps null: false
       t.string :price
       t.string :image_url
+      t.string :item_code
     end
   end
 end

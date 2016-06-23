@@ -67,32 +67,48 @@ get '/signout' do
   redirect '/'
 end
 
-
-
-#とりあえず楽天apiのテスト
-get '/rakuten' do
-  @shelter = Shelter.find(session[:shelter])
-
+get '/show_items' do
   @items = Item.all
-
-  @shelter_items = @shelter.items.all
-
-
-  erb :show
+  @shelters = Shelter.all
+  erb :show_items
 end
 
 
+get '/search_item' do
+  erb :search_item
+end
 
-post '/search' do
-  @items = RakutenWebService::Ichiba::Item.search(:keyword => params[:item_name])
-  erb :rakuten
+post '/search_result' do
+  @keyword = params[:keyword]
+  @items = RakutenWebService::Ichiba::Item.search(:keyword => @keyword)
+  p @items.first
+  erb :search_result
 end
 
 post '/add_want' do
-  @shelter = Shelter.find(session[:shelter])
-  @shelter.items.create(name: params[:name], price: params[:place], image_url: params[:image_url])
 
-  redirect '/rakuten'
+  @shelter = Shelter.find(session[:shelter])
+  @item = Item.find_by(item_code: params[:item_code])
+
+  #Active Recordから返ってきた避難所情報をハッシュに変換(JSONに変換してからハッシュに変換)
+  shelter_hash = JSON.parse(@shelter.to_json)
+  p shelter_hash
+  p @shelter.hash
+  if @item
+    #Itemテーブルにすでに登録されるかつ，避難所と物資が結びついている時
+    if @shelter.items.find_by(item_code: params[:item_code])
+      p "すでに結びついてるよ"
+    else 
+      #Itemテーブルに登録されているが結びついていない時はリレーション追加
+      @item.shelters << @shelter
+      p "結びつけた"
+    end
+  else
+    #Itemテーブルに登録されていない場合は追加
+    @shelter.items.create(name: params[:name], price: params[:place], image_url: params[:image_url], item_code: params[:item_code])
+    p "作成しました．"
+  end
+  redirect '/'
 end
 
 
