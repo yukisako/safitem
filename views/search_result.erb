@@ -1,0 +1,25 @@
+<h1><%= @keyword %>の検索結果</h1>
+<% if @items %>
+  <% @items.first(10).each do |item| %>
+    <p><%= item['itemName']%></p>
+    <% unless item['mediumImageUrls'].empty? %>
+      <img src="<%= item['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '?_ex=300x300')%>">
+      <% else %>
+        <p>no image</p>
+        <!-- ここにイメージない時の画像貼る -->
+      <% end %>
+    <p><%= item['itemPrice'] %>円</p>
+    <p><%= item['item_code'] %></p>
+    <form action="add_want" method="post">
+      <%# hiddenを使うよりいい方法ありそう %>
+      <input type="hidden" name="name" value="<%= item['itemName']%>" />
+      <input type="hidden" name="place" value="<%= item['itemPrice'] %>" />
+      <% unless item['mediumImageUrls'].empty? %>
+        <input type="hidden" name="image_url" value="<%= item['mediumImageUrls'].first['imageUrl'] %>" />
+      <% end %>
+      <input type="hidden" name="item_code" value="<%= item['item_code'] %>" />
+      <input type="submit" value="不足中" >
+    </form>
+    <hr>
+  <% end %>
+<% end %>

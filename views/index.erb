@@ -8,11 +8,16 @@
   <% unless session[:shelter] %>
     <a href="/signin">ログイン</a><a href="/signup">新規登録</a>
     <h2>現在未ログイン</h2>
-    <%= erb :search %>
   <% else %>
     <a href="/signout">ログアウト</a>
-    <h2><%= Shelter.find(session[:shelter]).shelter_name %>としてログイン</h2>
+    <h2><%= Shelter.find(session[:shelter]).shelter_name %>としてログイン中</h2>
+    <p><a href="/search_item">必要物資を検索して追加する</a></p>
+    <p><a href="/show/shelters">現在登録されている避難所の一覧</a></p>
+    <p><a href="/show_items">現在登録されている全必要物資</a></p>
+
   <% end %>
+
+  
   
 </body>
 </html>

@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160619054829) do
+ActiveRecord::Schema.define(version: 20160620153054) do
+
+  create_table "items", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "price"
+    t.string   "image_url"
+    t.string   "item_code"
+  end
+
+  create_table "shelter_items", force: :cascade do |t|
+    t.integer  "shelter_id", null: false
+    t.integer  "item_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "shelter_items", ["item_id"], name: "index_shelter_items_on_item_id"
+  add_index "shelter_items", ["shelter_id"], name: "index_shelter_items_on_shelter_id"
 
   create_table "shelters", force: :cascade do |t|
     t.string   "shelter_name"

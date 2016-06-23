@@ -1,0 +1,14 @@
+<h1><%= @shelter.shelter_name %>の必要物資</h1>
+<% if @shelter_items %>
+  <% @shelter_items.first(10).each do |item| %>
+    <p><%= item.name%></p>
+    <% if item.image_url %>
+      <img src="<%= item.image_url %>">
+      <% else %>
+        <p>no image</p>
+        <!-- ここにイメージない時の画像貼る -->
+      <% end %>
+    <p><%= item.price %>円</p>
+    <hr>
+  <% end %>
+<% end %>
