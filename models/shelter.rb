@@ -24,3 +24,14 @@ class ShelterItem < ActiveRecord::Base
   belongs_to :shelter
   belongs_to :item
 end
+
+class User < ActiveRecord::Base
+  has_secure_password
+
+  #バリデーションに関しては後でもっと詳しくする
+  validates :email,
+    presence: true,
+    format: {with:/.+@.+/}
+  validates :password,
+    length: {in: 5..10}
+end

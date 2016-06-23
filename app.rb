@@ -9,17 +9,37 @@ enable :sessions
 
 require './models/shelter.rb'
 
-get '/' do
+get '/' do 
+  if session[:shelter]
+    @name = Shelter.find(session[:shelter]).shelter_name
+  elsif session[:user]
+    @name = User.find(session[:user]).user_name
+  end
   erb :index
 end
 
-get '/signin' do
-  erb :sign_in
+get '/shelter/signin' do
+  erb :'/shelter/sign_in'
 end
 
-get '/signup' do
-  erb :sign_up
+get '/user/signin' do
+  erb :'user/sign_in'
 end
+
+get '/shelter/signup' do
+  erb :'shelter/sign_up'
+end
+
+get '/user/signup' do
+  erb :'user/sign_up'
+end
+
+get '/user/item_list' do
+  @user = User.find(session[:user])
+  p @user
+  erb :'user/item_list'
+end
+
 
 get '/show/shelters' do
   @shelters = Shelter.all
@@ -34,7 +54,7 @@ get '/shelter_items/:id' do
   erb :shelter_items_list
 end
 
-post '/signup' do
+post '/shelter/signup' do
   @shelter = Shelter.create({
     email: params[:email],
     password: params[:password],
@@ -48,22 +68,54 @@ post '/signup' do
   #persisted?はユーザが保存済みかをチェックするメソッド
   if @shelter.persisted?
     session[:shelter] = @shelter.id
+    session[:type] = "shelter"
   end
 
   redirect '/'
 end
 
-post '/signin' do
+post '/user/signup' do
+  @user = User.create({
+    email: params[:email],
+    password: params[:password],
+    password_confirmation: params[:password_confirmation],
+    phone: params[:phone],
+    user_name: params[:user_name],
+    home_adress: params[:home_adress]
+    })
+
+  #persisted?はユーザが保存済みかをチェックするメソッド
+  if @user.persisted?
+    session[:user] = @user.id
+    session[:type] = "user"
+  end
+
+  redirect '/'
+end
+
+post '/shelter/signin' do
   shelter = Shelter.find_by(email: params[:email])
   if shelter && shelter.authenticate(params[:password])
     session[:shelter] = shelter.id
+    session[:type] = "shelter"
   end
 
+  redirect '/'
+end
+
+post '/user/signin' do
+  user = User.find_by(email: params[:email])
+  if user && user.authenticate(params[:password])
+    session[:user] = user.id
+    session[:type] = "user"
+  end
   redirect '/'
 end
 
 get '/signout' do
   session[:shelter] = nil
+  session[:user] = nil
+  session[:type] = nil
   redirect '/'
 end
 
