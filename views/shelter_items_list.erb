@@ -9,6 +9,16 @@
         <!-- ここにイメージない時の画像貼る -->
       <% end %>
     <p><%= item.price %>円</p>
+
+    
+    <% if session[:type] == "user" %>
+      <form action="/support" method="post">
+        <%# hiddenを使うよりいい方法ありそう %>
+        <input type="hidden" name="shelter_id" value="<%= @shelter.id %>" />
+        <input type="hidden" name="item_id" value="<%= item.id %>" />
+        <input type="submit" value="支援する" >
+      </form>
+    <% end %>
     <hr>
   <% end %>
 <% end %>

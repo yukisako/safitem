@@ -157,6 +157,7 @@ post '/add_want' do
     end
   else
     #Itemテーブルに登録されていない場合は追加
+    #これ上でやったハッシュで書けばいいのでは？
     @shelter.items.create(name: params[:name], price: params[:place], image_url: params[:image_url], item_code: params[:item_code])
     p "作成しました．"
   end
@@ -164,3 +165,14 @@ post '/add_want' do
 end
 
 
+post '/support' do
+  p params[:item_id]
+  p params[:shelter_id]
+  #これ，item_idとshelter_idの２つでshelter_itemテーブルに検索かけてるけど，うまいことidとりたい．
+  item = ShelterItem.find_by(item_id: params[:item_id], shelter_id: params[:shelter_id])
+  @user = User.find(session[:user])
+  p @user
+  p item
+  item.users << @user
+  "hoge"
+end

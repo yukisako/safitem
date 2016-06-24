@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160623113741) do
+ActiveRecord::Schema.define(version: 20160624010258) do
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
@@ -44,6 +44,16 @@ ActiveRecord::Schema.define(version: 20160623113741) do
   end
 
   add_index "shelters", ["email"], name: "index_shelters_on_email", unique: true
+
+  create_table "user_items", force: :cascade do |t|
+    t.integer  "user_id",         null: false
+    t.integer  "shelter_item_id", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "user_items", ["shelter_item_id"], name: "index_user_items_on_shelter_item_id"
+  add_index "user_items", ["user_id"], name: "index_user_items_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
