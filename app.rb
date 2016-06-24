@@ -36,7 +36,12 @@ end
 
 get '/user/item_list' do
   @user = User.find(session[:user])
-  p @user
+  @shelter_items = @user.shelter_items.all
+  #このshelter_itemsに入ってるのはidだけ
+  #ここ汚い処理してる
+  
+
+
   erb :'user/item_list'
 end
 
@@ -174,5 +179,6 @@ post '/support' do
   p @user
   p item
   item.users << @user
-  "hoge"
+  redirect '/'
 end
+

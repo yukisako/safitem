@@ -1,1 +1,15 @@
 <h1><%= @user.user_name %>の支援表明一覧</h1>
+
+<ul>
+  <% @shelter_items.each do |shelter_item| %>
+  <% item = Item.find(shelter_item.item_id) %>
+  <% shelter = Shelter.find(shelter_item.shelter_id) %>
+  <li>
+    <p><%= shelter.shelter_name %>に寄付</p>
+    <p><%= item.name %></p>
+    <p><%= item.price %></p>
+    
+    </li>
+  <hr>
+  <% end %>
+</ul>
