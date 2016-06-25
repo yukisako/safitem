@@ -1,0 +1,32 @@
+header nav {
+  background-color: #FFFFFF !important;
+  height: 80px;
+}
+
+header .navbar-nav{
+  margin-top: 20px;
+
+}
+
+
+header h1.logo{
+  width: 200px;
+  height: 50px;
+  margin-left: 100px;
+  margin-top: 5px;
+  background-image: url("../images/top_logo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+}
+
+footer {
+    padding: 20px 0;
+    font-size: 93%;
+    text-align: center;
+    color: #666;
+}
+
+.container {
+  padding-top: 80px;
+}

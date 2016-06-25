@@ -57,14 +57,17 @@ id,item_code,name,url,price
 
 ####テーマカラー
 
-\#FC616E
+\#FC919E
 
 
 ##参考リンク
 
-###ビューをフォルダ分け
 
+ビューをフォルダ分け　
 http://qiita.com/shiopon01/items/4490ecc1deaef72823dd
+
+bootstrap読み込み　
+http://momota.github.io/blog/2013/09/22/sinatra/
 
 
 ##ToDo
@@ -87,4 +90,8 @@ editのページ作ればいいだけなのでそんなむずくない
 
 物品削除
 
+
+###素材
+
+いらすとや http://www.irasutoya.com/
 

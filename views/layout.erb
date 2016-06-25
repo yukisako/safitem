@@ -3,8 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Safitem</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
+  <%= erb :"layouts/header" %>
+  <div class="container">
   <%= yield %>
+  </div>
+  <footer>
+    <hr />
+    <p>&copy;Safitem  2016 Yuki Sako.</p>
+  </footer>
+  <script src="http://code.jquery.com/jquery.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
