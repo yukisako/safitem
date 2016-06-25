@@ -21,7 +21,7 @@ end
 #登録とかログイン，ログアウト周り
 ##ユーザの新規登録，
 get '/user/signup' do
-  erb :'user/sign_up'
+  erb :'/login/user/sign_up'
 end
 
 post '/user/signup' do
@@ -45,7 +45,7 @@ end
 
 ##ユーザのログイン
 get '/user/signin' do
-  erb :'user/sign_in'
+  erb :'/login/user/sign_in'
 end
 
 post '/user/signin' do
@@ -59,7 +59,7 @@ end
 
 ##避難所の新規登録
 get '/shelter/signup' do
-  erb :'shelter/sign_up'
+  erb :'/login/shelter/sign_up'
 end
 
 post '/shelter/signup' do
@@ -84,7 +84,7 @@ end
 
 ##避難所のログイン
 get '/shelter/signin' do
-  erb :'/shelter/sign_in'
+  erb :'/login/shelter/sign_in'
 end
 
 post '/shelter/signin' do
@@ -109,21 +109,21 @@ end
 ##現在登録されている避難所一覧を表示
 get '/show/shelters' do
   @shelters = Shelter.all
-  erb :show_shelters
+  erb :'/shelter/show_shelters'
 end
 
 ##現在登録されている必要物資一覧を表示
 get '/show_items' do
   @items = Item.all
   @shelters = Shelter.all
-  erb :show_items
+  erb :'item/show_items'
 end
 
 ##各避難所が欲しがっている物資一覧を表示
 get '/shelter_items/:id' do
   @shelter = Shelter.find(params[:id])
   @shelter_items = @shelter.items.all
-  erb :shelter_items_list
+  erb :'/shelter/shelter_items_list'
 end
 
 #ユーザのみの処理
@@ -142,12 +142,12 @@ end
 get '/support_list' do 
   @shelter = Shelter.find(session[:shelter])
   @shelter_items = @shelter.items.all
-  erb :support_list
+  erb :'/shelter/support_list'
 end
 
 ##必要物資の検索画面
 get '/search_item' do
-  erb :search_item
+  erb :'/item/search_item'
 end
 
 ##必要物資検索結果画面
@@ -155,7 +155,7 @@ post '/search_result' do
   @keyword = params[:keyword]
   @items = RakutenWebService::Ichiba::Item.search(:keyword => @keyword)
   p @items.first
-  erb :search_result
+  erb :'/item/search_result'
 end
 
 ##必要物資登処理
