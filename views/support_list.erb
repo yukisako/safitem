@@ -1,4 +1,4 @@
-<h1><%= @shelter.shelter_name %>の必要物資</h1>
+<h1><%= @shelter.shelter_name %>への支援希望</h1>
 <% if @shelter_items %>
   <% @shelter_items.each do |item| %>
     <p><%= item.name%></p>
@@ -11,15 +11,8 @@
     <p><%= item.price %>円</p>
     <% users = ShelterItem.find_by(item_id: item.id, shelter_id: @shelter.id).users.all %>
     <p><%= users.count %>人が支援意思あり</p>
-
-    
-    <% if session[:type] == "user" %>
-      <form action="/support" method="post">
-        <%# hiddenを使うよりいい方法ありそう %>
-        <input type="hidden" name="shelter_id" value="<%= @shelter.id %>" />
-        <input type="hidden" name="item_id" value="<%= item.id %>" />
-        <input type="submit" value="支援する" >
-      </form>
+    <% users.each do |user| %>
+      <span><%= user.user_name %>　</span>
     <% end %>
     <hr>
   <% end %>

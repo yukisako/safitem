@@ -5,13 +5,21 @@
     <title>Safitem</title>
 </head>
 <body>
-  <% unless session[:shelter] %>
-    <a href="/signin">ログイン</a><a href="/signup">新規登録</a>
+  <% unless session[:shelter] || session[:user] %>
+    <a href="/shelter/signin">避難所ログイン</a>
+    <a href="/shelter/signup">避難所新規登録</a>
+    <a href="/user/signin">ユーザログイン</a>
+    <a href="/user/signup">ユーザ新規登録</a>
     <h2>現在未ログイン</h2>
   <% else %>
     <a href="/signout">ログアウト</a>
-    <h2><%= Shelter.find(session[:shelter]).shelter_name %>としてログイン中</h2>
-    <p><a href="/search_item">必要物資を検索して追加する</a></p>
+    <h2><%= @name %>[<%=session[:type]%>]としてログイン中</h2>
+    <% if session[:type] == "shelter" %> 
+      <p><a href="/search_item">必要物資を検索して追加する</a></p>
+      <p><a href="/support_list">支援してくれる人一覧</p>
+    <% else %>
+      <a href="/user/item_list">自分が支援表明している物資一覧</a>
+    <% end %>
     <p><a href="/show/shelters">現在登録されている避難所の一覧</a></p>
     <p><a href="/show_items">現在登録されている全必要物資</a></p>
 
