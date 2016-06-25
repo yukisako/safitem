@@ -16,6 +16,7 @@
     <h2><%= @name %>[<%=session[:type]%>]としてログイン中</h2>
     <% if session[:type] == "shelter" %> 
       <p><a href="/search_item">必要物資を検索して追加する</a></p>
+      <p><a href="/support_list">支援してくれる人一覧</p>
     <% else %>
       <a href="/user/item_list">自分が支援表明している物資一覧</a>
     <% end %>

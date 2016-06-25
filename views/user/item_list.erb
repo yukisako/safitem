@@ -7,7 +7,8 @@
   <li>
     <p><%= shelter.shelter_name %>に寄付</p>
     <p><%= item.name %></p>
-    <p><%= item.price %></p>
+    <img src="<%= item.image_url %>" alt="item.name">
+    <p><%= item.price %>円</p>
     </li>
   <hr>
   <% end %>

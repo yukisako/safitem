@@ -18,6 +18,15 @@ get '/' do
   erb :index
 end
 
+get '/support_list' do 
+
+  @shelter = Shelter.find(session[:shelter])
+
+  @shelter_items = @shelter.items.all
+
+  erb :support_list
+end
+
 get '/shelter/signin' do
   erb :'/shelter/sign_in'
 end
@@ -39,9 +48,6 @@ get '/user/item_list' do
   @shelter_items = @user.shelter_items.all
   #このshelter_itemsに入ってるのはidだけ
   #ここ汚い処理してる
-  
-
-
   erb :'user/item_list'
 end
 
