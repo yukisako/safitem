@@ -1,15 +1,21 @@
+<link rel="stylesheet" href="/stylesheets/list.css">
+
 <h1><%= @user.user_name %>の支援表明一覧</h1>
 
-<ul>
+<div class="container-inner inner-default clearfix">
   <% @shelter_items.each do |shelter_item| %>
-  <% item = Item.find(shelter_item.item_id) %>
-  <% shelter = Shelter.find(shelter_item.shelter_id) %>
-  <li>
-    <p><%= shelter.shelter_name %>に寄付</p>
-    <p><%= item.name %></p>
-    <img src="<%= item.image_url %>" alt="item.name">
-    <p><%= item.price %>円</p>
-    </li>
-  <hr>
+    <% item = Item.find(shelter_item.item_id) %>
+    <% shelter = Shelter.find(shelter_item.shelter_id) %> 
+    <div class="item-box">
+      <div class="image"> 
+        <div class="img-wrap">
+          <img src="<%= item.image_url %>" alt="item.name">
+        </div>
+      </div>
+      <div class="detail">
+        <p class="title"><%= item.name %></p>
+        <p><%= shelter.shelter_name %>に寄付</p>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>

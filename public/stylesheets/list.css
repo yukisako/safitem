@@ -1,0 +1,50 @@
+.item-box {
+  width: 250px;
+  margin: 15px;
+  float: left;
+  box-shadow: 0 1px 1px rgba(255,0,0,0.1);
+  position: relative;
+}
+
+.item-box .image {
+  width: 250px;
+  height: 250px;
+  display: table;
+  border: 1px solid #ddd;
+  background: #FC919E;
+  border-top-right-radius: 3%;
+  border-top-left-radius: 3%;
+}
+.item-box .image .img-wrap {
+  width: 250px;
+  height: 250px;
+  padding: 10px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+
+.item-box .image .img-wrap img {
+  max-height: 250px;
+}
+
+.item-box .detail{
+  height: 70px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-top: 0;
+  background: #ffffff;
+  font-size: 13px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.item-box .detail .title{
+  margin: 0;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
