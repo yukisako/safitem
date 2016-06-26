@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/stylesheets/list.css">
 
-<div class="col-sm-offset-1 col-sm-11">
-  <h1><span class="label label-lg thema-color"><%= @shelter.shelter_name %>の必要物資</span></h1>
+<div class="col-sm-offset-0 col-sm-12">
+  <h1><span class="label label-lg thema-color"><%= @shelter.shelter_name %>の必要物資一覧</span></h1>
 </div>
 
 
@@ -18,7 +18,7 @@
               <!-- ここにイメージない時の画像貼る -->
             <% end %>
             <div class="buttons">
-              <a href="#">
+              <a href="<%=item.item_url%>" target="_blank">
                 <button class="btn btn-primary">詳細</button>
               </a>
               <% if session[:type] == "user" %>

@@ -166,15 +166,14 @@ post '/add_want' do
   @item = Item.find_by(item_code: params[:item_code])
 
   if @item
-    #Itemテーブルにすでに登録されるかつ，避難所と物資が結びついている時
-    if @shelter.items.find_by(item_code: params[:item_code])
-    else 
+    #Itemテーブルにすでに登録されるかつ，避難所と物資が結びついている時はなにもしない
+    unless @shelter.items.find_by(item_code: params[:item_code])
       #Itemテーブルに登録されているが結びついていない時はリレーション追加
       @item.shelters << @shelter
     end
   else
     #Itemテーブルに登録されていない場合は追加
-    @shelter.items.create(name: params[:name], price: params[:place], image_url: params[:image_url], item_code: params[:item_code])
+    @shelter.items.create(name: params[:name], price: params[:place], image_url: params[:image_url], item_code: params[:item_code], item_url: params[:item_url])
   end
   redirect '/'
 end
@@ -188,7 +187,9 @@ post '/support' do
   @user = User.find(session[:user])
   p @user
   p item
-  item.users << @user
-  redirect '/'
+  unless @user.shelter_items.find_by(item_id: params[:item_id])
+    item.users << @user
+  end
+  redirect "/shelter_items/#{params[:shelter_id]}"
 end
 

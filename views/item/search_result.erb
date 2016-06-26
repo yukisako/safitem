@@ -18,6 +18,7 @@
         <input type="hidden" name="image_url" value="<%= item['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '?_ex=200x200') %>" />
       <% end %>
       <input type="hidden" name="item_code" value="<%= item['item_code'] %>" />
+      <input type="hidden" name="item_url" value="<%= item['itemUrl'] %>" />
       <input type="submit" value="不足中" >
     </form>
     <hr>
