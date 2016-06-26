@@ -1,5 +1,6 @@
 #top_cover_box {
     width: 100%;
+    min-width: 1020px;
     height: 360px;
     background: url("../images/cover.png") no-repeat;
     background-position: center center;
@@ -19,6 +20,7 @@
     top:20%;
     left:50%;
     font: Helvetica;
+    font-size: 3em;
     -webkit-transform: translate(-50%,-50%);
     -moz-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
@@ -29,6 +31,7 @@
     position:absolute;
     top:40%;
     left:50%;
+    font-size: 2em;
     -webkit-transform: translate(-50%,-50%);
     -moz-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);

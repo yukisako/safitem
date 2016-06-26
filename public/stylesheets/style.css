@@ -3,17 +3,24 @@ header nav {
   height: 80px;
 }
 
+div.navbar-header{
+  margin-left: 100px;
+}
+
 header .navbar-nav{
   margin-top: 20px;
 
 }
 
+header a{
+  padding: 0px;
+  margin: 0px;
+}
 
 header h1.logo{
   width: 200px;
-  height: 50px;
-  margin-left: 100px;
-  margin-top: 5px;
+  height: 45px;
+  margin: 7px 0px 0px 0px;
   background-image: url("../images/top_logo.png");
   background-repeat: no-repeat;
   background-size: contain;
@@ -29,4 +36,10 @@ footer {
 
 .container {
   padding-top: 80px;
+  background-color: #f9f9f9;
+}
+
+.thema-color{
+  background-color: #FC919E;
+  color: #FFF;
 }

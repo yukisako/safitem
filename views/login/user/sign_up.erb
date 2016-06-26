@@ -1,4 +1,4 @@
-<form action="/user/signup" method="POST">
+<!-- <form action="/user/signup" method="POST">
   <input type="text" name="email" placeholder="Eメール"><br>
   <input type="password" name="password" placeholder="パスワード
 "><br>
@@ -9,4 +9,59 @@ placeholder="パスワードの確認"><br>
   <input type="text" name="home_adress" placeholder="住所"><br>
   <input type="submit" value="新規登録">
 </form>
+ -->
 
+<div class="col-sm-offset-1 col-sm-11">
+  <h2><span class="label label-lg thema-color">ユーザ新規登録</span></h2>
+</div>
+
+<div class="signup">
+  <form action="/user/signup" method="POST" class="form-horizontal">
+    <div class="form-group">
+      <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+      <div class="col-sm-10">
+        <input type="text" name="email" class="form-control" id="inputEmail" placeholder="Email Adress">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+      <div class="col-sm-10">
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="password">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPasswordConfirm" class="col-sm-2 control-label">Password Confirm</label>
+      <div class="col-sm-10">
+        <input type="password" id="inputPasswordConfirm" name="password_confirmation" class="form-control" placeholder="password confirm">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPhone" class="col-sm-2 control-label">Phone Number</label>
+      <div class="col-sm-10">
+        <input type="text" name="phone" class="form-control" id="inputPhone" placeholder="Phone Number">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputName" class="col-sm-2 control-label">Your Name</label>
+      <div class="col-sm-10">
+        <input type="text" id="inputName" name="user_name" class="form-control" placeholder="Your Name">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputHomeAddress" class="col-sm-2 control-label">Home Adress</label>
+      <div class="col-sm-10">
+        <input type="text" id="inputHomeAdress" name="home_adress" class="form-control" placeholder="京都府京都市...">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default thema-color">Sign Up</button>
+      </div>
+    </div>
+  </form>
+</div>

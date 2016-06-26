@@ -25,6 +25,7 @@ get '/user/signup' do
 end
 
 post '/user/signup' do
+  p params
   @user = User.create({
     email: params[:email],
     password: params[:password],
@@ -133,7 +134,7 @@ get '/user/item_list' do
   @shelter_items = @user.shelter_items.all
   #このshelter_itemsに入ってるのはidだけ
   #ここ汚い処理してる
-  erb :'user/item_list'
+  erb :'item/item_list'
 end
 
 
