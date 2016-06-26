@@ -3,7 +3,7 @@
   <% @items.first(10).each do |item| %>
     <p><%= item['itemName']%></p>
     <% unless item['mediumImageUrls'].empty? %>
-      <img src="<%= item['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '?_ex=240x240')%>">
+      <img src="<%= item['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '?_ex=200x200')%>">
       <% else %>
         <p>no image</p>
         <!-- ここにイメージない時の画像貼る -->
@@ -15,7 +15,7 @@
       <input type="hidden" name="name" value="<%= item['itemName']%>" />
       <input type="hidden" name="place" value="<%= item['itemPrice'] %>" />
       <% unless item['mediumImageUrls'].empty? %>
-        <input type="hidden" name="image_url" value="<%= item['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '?_ex=240x240') %>" />
+        <input type="hidden" name="image_url" value="<%= item['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '?_ex=200x200') %>" />
       <% end %>
       <input type="hidden" name="item_code" value="<%= item['item_code'] %>" />
       <input type="submit" value="不足中" >

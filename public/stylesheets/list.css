@@ -15,6 +15,7 @@
   border-top-right-radius: 3%;
   border-top-left-radius: 3%;
 }
+
 .item-box .image .img-wrap {
   width: 250px;
   height: 250px;
@@ -30,9 +31,9 @@
 }
 
 .item-box .detail{
-  height: 70px;
+  height: 75px;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #bbb;
   border-top: 0;
   background: #ffffff;
   font-size: 13px;
@@ -47,4 +48,27 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+
+div.buttons button{
+  display: inline-block;
+  margin:3px 5px 0px 0px;
+}
+
+div.buttons form{
+  display: inline-block;
+  margin: 3px 0px 0px 5px;
+}
+
+.detail .support-count{
+  display: inline-block;
+  border-bottom: solid #eee;
+  margin:0px 5px 2px 0px;
+}
+
+.detail .price{
+  display: inline-block;
+  border-bottom: solid #eee;
+  margin:0px 0px 2px 15px;
 }
