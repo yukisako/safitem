@@ -153,7 +153,16 @@ end
 
 ##必要物資検索結果画面
 post '/search_result' do
-  @keyword = params[:keyword]
+  session[:keyword] = params[:keyword] if params[:keyword]
+  @keyword = session[:keyword]
+  @items = RakutenWebService::Ichiba::Item.search(:keyword => @keyword)
+  p @items.first
+  erb :'/item/search_result'
+end
+
+get '/search_result' do
+  session[:keyword] = params[:keyword] if params[:keyword]
+  @keyword = session[:keyword]
   @items = RakutenWebService::Ichiba::Item.search(:keyword => @keyword)
   p @items.first
   erb :'/item/search_result'
@@ -173,9 +182,11 @@ post '/add_want' do
     end
   else
     #Itemテーブルに登録されていない場合は追加
-    @shelter.items.create(name: params[:name], price: params[:place], image_url: params[:image_url], item_code: params[:item_code], item_url: params[:item_url])
+    @shelter.items.create(name: params[:name], price: params[:price], image_url: params[:image_url], item_code: params[:item_code], item_url: params[:item_url])
   end
-  redirect '/'
+
+  #あとでjQueryでポスト処理を書き直す
+  redirect back
 end
 
 ##自分の避難所を支援してくれる人一覧を取得

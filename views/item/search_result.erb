@@ -1,26 +1,46 @@
-<h1><%= @keyword %>の検索結果</h1>
-<% if @items %>
-  <% @items.first(10).each do |item| %>
-    <p><%= item['itemName']%></p>
-    <% unless item['mediumImageUrls'].empty? %>
-      <img src="<%= item['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '?_ex=200x200')%>">
-      <% else %>
-        <p>no image</p>
-        <!-- ここにイメージない時の画像貼る -->
-      <% end %>
-    <p><%= item['itemPrice'] %>円</p>
-    <p><%= item['item_code'] %></p>
-    <form action="add_want" method="post">
-      <%# hiddenを使うよりいい方法ありそう %>
-      <input type="hidden" name="name" value="<%= item['itemName']%>" />
-      <input type="hidden" name="place" value="<%= item['itemPrice'] %>" />
-      <% unless item['mediumImageUrls'].empty? %>
-        <input type="hidden" name="image_url" value="<%= item['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '?_ex=200x200') %>" />
-      <% end %>
-      <input type="hidden" name="item_code" value="<%= item['item_code'] %>" />
-      <input type="hidden" name="item_url" value="<%= item['itemUrl'] %>" />
-      <input type="submit" value="不足中" >
-    </form>
-    <hr>
+<link rel="stylesheet" href="/stylesheets/list.css">
+
+<div class="col-sm-offset-0 col-sm-12">
+  <h1><span class="label label-lg thema-color"><%= @keyword %>の検索結果</span></h1>
+</div>
+
+
+<div class="container-inner inner-default clearfix">
+  <% if @items %>
+    <% @items.first(10).each do |item| %>
+      <div class="item-box">
+        <div class="image">
+          <div class="img-wrap">
+            <% unless item['mediumImageUrls'].empty? %>
+              <img src="<%= item['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '?_ex=200x200')%>">
+            <% else %>
+              <p>no image</p>
+              <!-- ここにイメージない時の画像貼る -->
+            <% end %>
+            <div class="buttons">
+              <a href="<%=item['itemUrl']%>" target="_blank">
+                <button class="btn btn-primary">詳細</button>
+              </a>
+              <form action="add_want" method="post">
+                <%# hiddenを使うよりいい方法ありそう %>
+                <input type="hidden" name="name" value="<%= item['itemName']%>" />
+                <input type="hidden" name="price" value="<%= item['itemPrice'] %>" />
+                <% unless item['mediumImageUrls'].empty? %>
+                  <input type="hidden" name="image_url" value="<%= item['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '?_ex=200x200') %>" />
+                <% end %>
+                <input type="hidden" name="item_code" value="<%= item['item_code'] %>" />
+                <input type="hidden" name="item_url" value="<%= item['itemUrl'] %>" />
+                <input type="submit" value="不足中" class="btn btn-warning">
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="detail">
+          <span class="title"><%= item['itemName'] %></span>
+          <div class="price"><%= item['itemPrice'] %>円</div>
+        </div>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>
+
