@@ -6,6 +6,7 @@ class CreateItems < ActiveRecord::Migration
       t.string :price
       t.string :image_url
       t.string :item_code
+      t.string :item_url
     end
   end
 end

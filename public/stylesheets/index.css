@@ -1,0 +1,59 @@
+#top_cover_box {
+    width: 100%;
+    min-width: 1020px;
+    height: 360px;
+    background: url("../images/cover.png") no-repeat;
+    background-position: center center;
+    background-size: 100%;
+}
+
+#top_cover {
+    width: 1020px;
+    height: 360px;
+    margin: 0 auto;
+    position: relative;
+}
+  
+#top_cover h1 {
+    color: #fff;
+    position:absolute;
+    top:20%;
+    left:50%;
+    font: Helvetica;
+    font-size: 3em;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+#top_cover h2 {
+    color: #fff;
+    position:absolute;
+    top:40%;
+    left:50%;
+    font-size: 2em;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+
+#top_cover a.signup-shelter{
+    color: #fff;
+    position:absolute;
+    top:70%;
+    left:60%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+#top_cover a.signup-user{
+    color: #fff;
+    position:absolute;
+    top:70%;
+    left:40%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}

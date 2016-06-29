@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20160624010258) do
     t.string   "price"
     t.string   "image_url"
     t.string   "item_code"
+    t.string   "item_url"
   end
 
   create_table "shelter_items", force: :cascade do |t|

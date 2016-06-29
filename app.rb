@@ -25,6 +25,7 @@ get '/user/signup' do
 end
 
 post '/user/signup' do
+  p params
   @user = User.create({
     email: params[:email],
     password: params[:password],
@@ -133,7 +134,7 @@ get '/user/item_list' do
   @shelter_items = @user.shelter_items.all
   #このshelter_itemsに入ってるのはidだけ
   #ここ汚い処理してる
-  erb :'user/item_list'
+  erb :'item/item_list'
 end
 
 
@@ -152,7 +153,16 @@ end
 
 ##必要物資検索結果画面
 post '/search_result' do
-  @keyword = params[:keyword]
+  session[:keyword] = params[:keyword] if params[:keyword]
+  @keyword = session[:keyword]
+  @items = RakutenWebService::Ichiba::Item.search(:keyword => @keyword)
+  p @items.first
+  erb :'/item/search_result'
+end
+
+get '/search_result' do
+  session[:keyword] = params[:keyword] if params[:keyword]
+  @keyword = session[:keyword]
   @items = RakutenWebService::Ichiba::Item.search(:keyword => @keyword)
   p @items.first
   erb :'/item/search_result'
@@ -165,17 +175,18 @@ post '/add_want' do
   @item = Item.find_by(item_code: params[:item_code])
 
   if @item
-    #Itemテーブルにすでに登録されるかつ，避難所と物資が結びついている時
-    if @shelter.items.find_by(item_code: params[:item_code])
-    else 
+    #Itemテーブルにすでに登録されるかつ，避難所と物資が結びついている時はなにもしない
+    unless @shelter.items.find_by(item_code: params[:item_code])
       #Itemテーブルに登録されているが結びついていない時はリレーション追加
       @item.shelters << @shelter
     end
   else
     #Itemテーブルに登録されていない場合は追加
-    @shelter.items.create(name: params[:name], price: params[:place], image_url: params[:image_url], item_code: params[:item_code])
+    @shelter.items.create(name: params[:name], price: params[:price], image_url: params[:image_url], item_code: params[:item_code], item_url: params[:item_url])
   end
-  redirect '/'
+
+  #あとでjQueryでポスト処理を書き直す
+  redirect back
 end
 
 ##自分の避難所を支援してくれる人一覧を取得
@@ -187,7 +198,9 @@ post '/support' do
   @user = User.find(session[:user])
   p @user
   p item
-  item.users << @user
-  redirect '/'
+  unless @user.shelter_items.find_by(item_id: params[:item_id])
+    item.users << @user
+  end
+  redirect "/shelter_items/#{params[:shelter_id]}"
 end
 
