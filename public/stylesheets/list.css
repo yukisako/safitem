@@ -107,3 +107,8 @@ div.buttons form{
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
 }
+
+.want-list-btn{
+  display: inline-block;
+  margin: 5px;
+}

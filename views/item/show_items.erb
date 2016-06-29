@@ -23,8 +23,10 @@
                 <button class="btn btn-primary">詳細</button>
               </a>
               <% if session[:type] == "user" %>
-                <%# ユーザだったら不足ボタン %>
-              <% elsif session[:type == "shelter"] %>
+                <form action="/support/<%= item.id %>" method="post">
+                  <input type="submit" value="支援する" class="btn btn-warning">
+                </form>
+              <% elsif session[:type]  == "shelter"%>
                   <form action="/add_want" method="post">
                   <%# hiddenを使うよりいい方法ありそう %>
                   <input type="hidden" name="back_id" value="<%= session[:shelter_id]%>" />

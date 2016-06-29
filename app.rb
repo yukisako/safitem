@@ -189,7 +189,7 @@ post '/add_want' do
   redirect back
 end
 
-##自分の避難所を支援してくれる人一覧を取得
+##サポートする
 post '/support' do
   p params[:item_id]
   p params[:shelter_id]
@@ -204,3 +204,18 @@ post '/support' do
   redirect "/shelter_items/#{params[:shelter_id]}"
 end
 
+post '/support/:item_id' do
+  @item = Item.find(params[:item_id])
+  @shelters = @item.shelters.all
+  erb :'/shelter/want_list'
+end
+
+post  '/show_support_users' do
+  @item = Item.find(params[:item_id])
+  p params[:item_id]
+  p params[:shelter_id]
+  item = ShelterItem.find_by(item_id: params[:item_id], shelter_id: params[:shelter_id])
+  @users = item.users.all
+
+  erb :'/shelter/show_support_users'
+end
