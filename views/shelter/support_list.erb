@@ -1,19 +1,52 @@
-<h1><%= @shelter.shelter_name %>への支援希望</h1>
-<% if @shelter_items %>
-  <% @shelter_items.each do |item| %>
-    <p><%= item.name%></p>
-    <% if item.image_url %>
-      <img src="<%= item.image_url %>">
-      <% else %>
-        <p>no image</p>
-        <!-- ここにイメージない時の画像貼る -->
-      <% end %>
-    <p><%= item.price %>円</p>
-    <% users = ShelterItem.find_by(item_id: item.id, shelter_id: @shelter.id).users.all %>
-    <p><%= users.count %>人が支援意思あり</p>
-    <% users.each do |user| %>
-      <span><%= user.user_name %>　</span>
+<link rel="stylesheet" href="/stylesheets/list.css">
+
+<div class="col-sm-12 page-head">
+  <h2><span class="label label-lg thema-color"><%= @shelter.shelter_name %>への支援希望</span></h2>
+</div>
+
+
+<div class="container-inner inner-default clearfix">
+  <% if @shelter_items %>
+    <% @shelter_items.each do |item| %>
+      <div class="item-box">
+        <div class="image">
+          <div class="img-wrap">
+            <% if item.image_url %>
+              <img src="<%= item.image_url %>" alt="item.name">
+            <% else %>
+              <p>no image</p>
+              <!-- ここにイメージない時の画像貼る -->
+            <% end %>
+            <div class="buttons">
+              <a href="<%=item.item_url%>" target="_blank">
+                <button class="btn btn-primary">詳細</button>
+              </a>
+              <% if session[:type] == "user" %>
+                <%# ユーザだったら不足ボタン %>
+              <% elsif session[:type == "shelter"] %>
+                  <form action="/add_want" method="post">
+                  <%# hiddenを使うよりいい方法ありそう %>
+                  <input type="hidden" name="back_id" value="<%= session[:shelter_id]%>" />
+                  <input type="hidden" name="name" value="<%= item.name%>" />
+                  <input type="hidden" name="price" value="<%= item.price %>" />
+                  <input type="hidden" name="image_url" value="<%= item.image_url %>" />
+                  <input type="hidden" name="item_code" value="<%= item.item_code %>" />
+                  <input type="hidden" name="item_url" value="<%= item.item_url %>" />
+                  <input type="submit" value="不足中" class="btn btn-warning">
+                </form>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="detail shelter-count">
+              <!-- <p>避難所名:<% item.shelters.each do |shelter|%><span><%= shelter.shelter_name %></span> <%end%>
+              </p> -->
+              <% users = ShelterItem.find_by(item_id: item.id, shelter_id: @shelter.id).users.all %>
+              <p><%= users.count %>人が支援意思あり</p>
+              <p class="title">物資名:<%= item.name%></p>
+              <p class="price">値段: <%= item.price %>円</p>
+        </div>
+      </div>  
     <% end %>
-    <hr>
   <% end %>
-<% end %>
+</div>
