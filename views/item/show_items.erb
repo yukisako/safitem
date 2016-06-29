@@ -1,0 +1,35 @@
+<h1>アイテム一覧ページ</h1>
+<h2>全アイテム</h2>
+<% if @items %>
+  <% @items.each do |item| %>
+    <p>避難所名:<% item.shelters.each do |shelter|%><span><%= shelter.shelter_name %></span> <%end%></p>
+    <p>物資名:<%= item.name%></p>
+    <% if item.image_url %>
+      <img src="<%= item.image_url %>">
+      <% else %>
+        <p>no image</p>
+        <!-- ここにイメージない時の画像貼る -->
+      <% end %>
+    <p>値段: <%= item.price %>円</p>
+    <hr>
+  <% end %>
+<% end %>
+
+<hr><hr>
+
+<h1>避難所別アイテム</h1>
+
+<% @shelters.each do |shelter| %>
+  <h2><%= shelter.shelter_name %></h2>
+  <% shelter.items.each do |item| %>
+    <p>物資名:<%= item.name%></p>
+      <% if item.image_url %>
+        <img src="<%= item.image_url %>">
+      <% else %>
+        <p>no image</p>
+        <!-- ここにイメージない時の画像貼る -->
+      <% end %>
+    <p>値段: <%= item.price %>円</p>
+    <hr>
+  <% end %>
+<% end %>

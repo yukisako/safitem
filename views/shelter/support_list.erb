@@ -1,0 +1,19 @@
+<h1><%= @shelter.shelter_name %>への支援希望</h1>
+<% if @shelter_items %>
+  <% @shelter_items.each do |item| %>
+    <p><%= item.name%></p>
+    <% if item.image_url %>
+      <img src="<%= item.image_url %>">
+      <% else %>
+        <p>no image</p>
+        <!-- ここにイメージない時の画像貼る -->
+      <% end %>
+    <p><%= item.price %>円</p>
+    <% users = ShelterItem.find_by(item_id: item.id, shelter_id: @shelter.id).users.all %>
+    <p><%= users.count %>人が支援意思あり</p>
+    <% users.each do |user| %>
+      <span><%= user.user_name %>　</span>
+    <% end %>
+    <hr>
+  <% end %>
+<% end %>
