@@ -72,3 +72,38 @@ div.buttons form{
   border-bottom: solid #eee;
   margin:0px 0px 2px 15px;
 }
+
+.item-box .shelter-info {
+  width: 250px;
+  height: 10px;
+  display: table;
+  border: 1px solid #ddd;
+  background: #FC919E;
+  border-top-right-radius: 3%;
+  border-top-left-radius: 3%;
+  padding: 10px;
+}
+
+.item-box .shelter-detail{
+  display: table;
+  height: 75px;
+  width: 250px;
+  border: 1px solid #bbb;
+  padding: 0px 10px 10px 10px;
+  /*border-top: 0;*/
+  background: #ffffff;
+  font-size: 13px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.item-box .shelter-count{
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #bbb;
+  border-top: 0;
+  background: #ffffff;
+  font-size: 13px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}

@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="/stylesheets/list.css">
+<div class="col-sm-12 page-head">
+  <h2><span class="label label-lg thema-color"><%= @user.user_name %>の支援表明一覧</span></h2>
+</div>
 
-<h1><%= @user.user_name %>の支援表明一覧</h1>
 
 <div class="container-inner inner-default clearfix">
   <% @shelter_items.each do |shelter_item| %>

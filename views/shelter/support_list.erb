@@ -1,4 +1,9 @@
-<h1><%= @shelter.shelter_name %>への支援希望</h1>
+<link rel="stylesheet" href="/stylesheets/list.css">
+
+<div class="col-sm-12 page-head">
+  <h2><span class="label label-lg thema-color"><%= @shelter.shelter_name %>への支援希望</span></h2>
+</div>
+
 <% if @shelter_items %>
   <% @shelter_items.each do |item| %>
     <p><%= item.name%></p>
