@@ -43,3 +43,8 @@ footer {
   background-color: #FC919E;
   color: #FFF;
 }
+
+.user-name{
+  display: inline-block;
+  font-size: 25px;
+}

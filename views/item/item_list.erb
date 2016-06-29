@@ -12,6 +12,17 @@
       <div class="image"> 
         <div class="img-wrap">
           <img src="<%= item.image_url %>" alt="item.name">
+          <div class="buttons">
+              <% if session[:type] !=nil %>
+                <a href="<%=item.item_url%>" target="_blank">
+                  <button class="btn btn-primary">詳細</button>
+                </a>
+                <form action="/support/delete/<%= shelter_item.id %>" method="post">
+                  <input type="submit" value="キャンセル" class="btn btn-warning">
+                </form>
+              <% end %>
+            </div>
+
         </div>
       </div>
       <div class="detail">

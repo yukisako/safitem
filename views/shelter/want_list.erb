@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="/stylesheets/list.css">
+
+<div class="col-sm-12 page-head">
+  <h2><span class="label label-lg thema-color">支援画面</span></h2>
+</div>
+<h3 class="col-offset-1 col-sm-11">どの避難所にこの物資を支援するか選んでください</h3>
+
+
+
+<div class="container-inner inner-default clearfix">
+  <div class="item-box">
+    <div class="image">
+      <div class="img-wrap">
+        <% if @item.image_url %>
+          <img src="<%= @item.image_url %>" alt="item.name">
+        <% else %>
+          <p>no image</p>
+          <!-- ここにイメージない時の画像貼る -->
+        <% end %>
+        <div class="buttons">
+          <a href="<%=@item.item_url%>" target="_blank">
+            <button class="btn btn-primary">詳細</button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="detail shelter-count">
+          <p><%= @item.shelters.count%>つの避難所が求めています<span>
+          <p class="title">物資名:<%= @item.name%></p>
+          <p class="price">値段: <%= @item.price %>円</p>
+    </div>
+  </div> 
+
+
+  <% @shelters.each do |shelter| %>
+  <div class="item-box">
+<!--     <div class="shelter-info">
+        <h2><span class="label label-lg thema-color"><%= shelter.shelter_name %></span></h2>
+        <a href="/shelter_items/<%= shelter.id %>">必要物資一覧ページヘ</a>
+        
+    </div> -->
+    <div class="shelter-detail">
+        <h2><span class="label thema-color shelter-name"><%= shelter.shelter_name %></span></h2>
+        
+
+      <p><span class="glyphicon glyphicon-home"></span> <%= shelter.home_adress %></p>
+        <p><span class="glyphicon glyphicon-envelope"></span> <%= shelter.email %></p>
+        <p><span class="glyphicon glyphicon-earphone"></span> <%= shelter.phone %></p>
+        <p><span class="glyphicon glyphicon-user"></span> <%= shelter.representative_name %></p>
+        <a href="/shelter_items/<%= shelter.id %>" class="btn btn-default want-list-btn">必要物資一覧</a>
+        <form action="/support" method="post" class="want-list-btn">
+          <%# hiddenを使うよりいい方法ありそう %>
+          <input type="hidden" name="shelter_id" value="<%= shelter.id %>" />
+          <input type="hidden" name="item_id" value="<%= @item.id %>" />
+          <input type="submit" value="支援する" class="btn btn-warning">
+        </form>
+    </div>
+  </div>
+
+  <% end %>
+</div>

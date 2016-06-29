@@ -21,20 +21,11 @@
               <a href="<%=item.item_url%>" target="_blank">
                 <button class="btn btn-primary">詳細</button>
               </a>
-              <% if session[:type] == "user" %>
-                <%# ユーザだったら不足ボタン %>
-              <% elsif session[:type == "shelter"] %>
-                  <form action="/add_want" method="post">
-                  <%# hiddenを使うよりいい方法ありそう %>
-                  <input type="hidden" name="back_id" value="<%= session[:shelter_id]%>" />
-                  <input type="hidden" name="name" value="<%= item.name%>" />
-                  <input type="hidden" name="price" value="<%= item.price %>" />
-                  <input type="hidden" name="image_url" value="<%= item.image_url %>" />
-                  <input type="hidden" name="item_code" value="<%= item.item_code %>" />
-                  <input type="hidden" name="item_url" value="<%= item.item_url %>" />
-                  <input type="submit" value="不足中" class="btn btn-warning">
-                </form>
-              <% end %>
+              <form action="/show_support_users" method="post">
+                <input type="hidden" name="item_id" value="<%= item.id %>" />
+                <input type="hidden" name="shelter_id" value="<%= @shelter.id %>" />
+                <input type="submit" value="支援者一覧" class="btn btn-warning">
+              </form>
             </div>
           </div>
         </div>
