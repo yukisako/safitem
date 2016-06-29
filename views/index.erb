@@ -1,42 +1,68 @@
 <div id="top_cover_box">
   <div id="top_cover">
-        <h1>物資支援サービス Safitem</h1>
-        <h2>あなたの支援が誰かを救う</h2>
-        
+    <h1>物資支援サービス Safitem</h1>
+    <h2>あなたの支援が誰かを救う</h2>
+      <% if session[:type] == "shelter" %>
+        <a href="/search_item" class="btn btn-lg btn-warning signup-shelter">必要物資追加</a>
+        <a href="/support_list" class="btn btn-lg btn-primary signup-user">不足物品リスト</a>
+      <% elsif session[:type] == "user" %>
+        <a href="/show/shelters" class="btn btn-lg btn-warning signup-shelter">避難所リスト</a>
+        <a href="/user/item_list" class="btn btn-lg btn-primary signup-user">自分の支援表明リスト</a>
+      <% else %>
         <a href="/shelter/signup" class="btn btn-lg btn-warning signup-shelter">避難所新規登録</a>
         <a href="/user/signup" class="btn btn-lg btn-primary signup-user">ユーザ新規登録</a>
+      <% end %>
     </div>
 </div>
 
 <link rel="stylesheet" href="/stylesheets/index.css" >
+<link rel="stylesheet" href="/stylesheets/list.css">
 
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
-<h1>トップページ工事中</h1>
+<div class="container-inner inner-default clearfix">
+  <% if @items %>
+    <% @items.each do |item| %>
+      <div class="item-box">
+        <div class="image">
+          <div class="img-wrap">
+            <% if item.image_url %>
+              <img src="<%= item.image_url %>" alt="item.name">
+            <% else %>
+              <p>no image</p>
+              <!-- ここにイメージない時の画像貼る -->
+            <% end %>
+            <div class="buttons">
+              <% if session[:type] !=nil %>
+                <a href="<%=item.item_url%>" target="_blank">
+                  <button class="btn btn-primary">詳細</button>
+                </a>
+                <% if session[:type] == "user" %>
+                  <form action="/support/<%= item.id %>" method="post">
+                    <input type="submit" value="支援する" class="btn btn-warning">
+                  </form>
+                <% elsif session[:type]  == "shelter"%>
+                    <form action="/add_want" method="post">
+                    <%# hiddenを使うよりいい方法ありそう %>
+                    <input type="hidden" name="back_id" value="<%= session[:shelter_id]%>" />
+                    <input type="hidden" name="name" value="<%= item.name%>" />
+                    <input type="hidden" name="price" value="<%= item.price %>" />
+                    <input type="hidden" name="image_url" value="<%= item.image_url %>" />
+                    <input type="hidden" name="item_code" value="<%= item.item_code %>" />
+                    <input type="hidden" name="item_url" value="<%= item.item_url %>" />
+                    <input type="submit" value="不足中" class="btn btn-warning">
+                  </form>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="detail shelter-count">
+              <!-- <p>避難所名:<% item.shelters.each do |shelter|%><span><%= shelter.shelter_name %></span> <%end%>
+              </p> -->
+              <p><%= item.shelters.count%>つの避難所が求めています<span>
+              <p class="title">物資名:<%= item.name%></p>
+              <p class="price">値段: <%= item.price %>円</p>
+        </div>
+      </div>  
+    <% end %>
+  <% end %>
+</div>

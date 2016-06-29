@@ -15,6 +15,7 @@ get '/' do
   elsif session[:user]
     @name = User.find(session[:user]).user_name
   end
+  @items = Item.all
   erb :index
 end
 
@@ -218,4 +219,10 @@ post  '/show_support_users' do
   @users = item.users.all
 
   erb :'/shelter/show_support_users'
+end
+
+post '/support/delete/:id' do
+  #ここ，紐付いてるのを一気に消す処理があったはず
+  UserItem.find_by(shelter_item_id: params[:id], user_id: session[:user]).destroy
+  redirect '/user/item_list'
 end
