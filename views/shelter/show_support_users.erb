@@ -18,15 +18,18 @@
         </div>
       </div>
     </div>
+
     <div class="detail shelter-count">
-          <p><%= @users.count%>人が支援表明<span>
-          <p class="title">物資名:<%= @item.name%></p>
-          <p class="price">値段: <%= @item.price %>円</p>
+      <p><%= @users.count%>人が支援表明<span>
+      <p class="title">物資名:<%= @item.name%></p>
+      <p class="price">値段: <%= @item.price %>円</p>
     </div>
   </div>
+
   <div class="col-sm-12 page-head">
-  <h2><span class="label label-lg thema-color">支援ユーザ一覧</span></h2>
-</div>
+    <h2><span class="label label-lg thema-color">支援ユーザ一覧</span></h2>
+  </div>
+  
   <% @users.each do |user| %>
     <p class="user-name"><span class="label label-info"><%= user.user_name %></span></p>
   <% end %>
