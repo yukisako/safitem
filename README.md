@@ -2,6 +2,48 @@
 
 避難所で不足している品物一覧を表示し，避難所と物資支援をしてくれる企業，個人を結ぶサービス
 
+![動作画面](./screenshot.png)
+
+#開発手順
+
+Ruby(Sinatra)で動いているので，Rubyが書ける環境にしておいてください．
+
+RubyのGemを管理する仕組みであるBundlerをインストール．
+
+`gem install bundler`
+
+そしたら，`bundle install`を行い，必要Gemを入れます．
+
+まずは
+[楽天APIアプリ登録](https://grp02.id.rakuten.co.jp/rms/nid/login?service_id=i14&lang=ja&login_ticket=c6e7bd27b847b8c6bae8c09c184dc0a9&return_url=%2Fapp%2Fcreate)
+よりアプリIDを取得してください．※楽天IDが必須です．
+
+取得できたら，`APPLICATION_ID=所得したアプリケーションID`で環境変数にアプリケーションIDを設定します．
+
+マイグレーションを行う必要があるので，`rake db:migrate`を行います．
+
+seeds.rbに避難所3つ分のデータとユーザ3人分のデータを書いておいたので，`rake db:seeds`でデータベースに避難所データとユーザデータが記録されます．
+
+その後，`rackup config.ru`でSafitemが起動します．
+
+`localhost:9292`でSafitemが起動しているので，ブラウザで確認しながら開発を行っていきます．
+
+プルリクエスト待っています．
+
+どんどんissueも立てて良くしていきたいなと．
+
+##To Do
+
+ユーザ，避難所間でメッセージのやり取りができる機能を付けたい
+
+決算もこのアプリ内でできたらいいと思う
+
+「パスワードを忘れた」の処理もいります．
+
+トップページの画像，ウインドウサイズ変えたら表示おかしくなるのを早急に直す．
+
+
+
 
 #以下メモ
 
@@ -58,37 +100,6 @@ id,item_code,name,url,price
 ####テーマカラー
 
 \#FC919E
-
-
-##参考リンク
-
-
-ビューをフォルダ分け　
-http://qiita.com/shiopon01/items/4490ecc1deaef72823dd
-
-bootstrap読み込み　
-http://momota.github.io/blog/2013/09/22/sinatra/
-
-
-##ToDo
-
-###ログイン周り
-
-バリデーション最適化
-
-Twitterログイン
-
-ログインしてなかったらトップページに戻してあげる処理
-
-###個人情報更新
-
-editのページ作ればいいだけなのでそんなむずくない
-
-個人情報を表示するページも．
-
-###楽天API
-
-物品削除
 
 
 ###素材
