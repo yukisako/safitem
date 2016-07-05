@@ -1,6 +1,6 @@
 #top_cover_box {
     width: 100%;
-    min-width: 1020px;
+    min-width: 900px;
     height: 360px;
     background: url("../images/cover.png") no-repeat;
     background-position: center center;
