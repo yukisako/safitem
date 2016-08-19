@@ -1,0 +1,16 @@
+<div class="col-sm-12 page-head">
+  <h2><span class="label label-lg thema-color"><%= @user.user_name %>さんのチャットリスト</span></h2>
+</div>
+
+<div>
+<ul class="list-group">
+    <% @shelter_ids.each do |shelter_id| %>
+        <% shelter = Shelter.find(shelter_id) %> 
+        <li class="list-group-item">
+            <a href="/chat_room/<%= shelter.id %>"><%= shelter.shelter_name %></a>
+        </li>
+    <% end %>
+</ul>
+</div>
+<!-- 余裕があれば通知機能とかも作りたい感ある
+     表示するリストがないときに「支援表明するとその避難所とチャットすることができるようになります」的な説明文を表示するとわかりやすいかもしれない -->
