@@ -1,23 +1,20 @@
 <header>
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarList">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">
-          <h1 class="logo">
-          </h1>
-        </a>
-      </div>
+  <!-- <nav class="navbar navbar-default navbar-fixed-top"> -->
+    <a class="navbar-brand" href="/">
+      <h1 class="logo"></h1>
+    </a>
+    <!-- <div class="container-fluid"> -->
+      <!-- <div class="navbar-header"> -->
+        <div id="navToggle">
+          <!-- <span class="sr-only">Toggle navigation</span> -->
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      <!-- </div> -->
       
-      <div class="collapse navbar-collapse" id="navbarList">
-        <ul class="nav navbar-nav">
+      <nav>
+        <ul>
           <% unless session[:shelter] || session[:user] %>
             <li><a href="/shelter/signin">避難所ログイン</a></li>
             <li><a href="/shelter/signup">避難所登録</a></li>
@@ -28,20 +25,29 @@
             
             <% if session[:type] == "shelter" %> 
               <li><a href="/search_item">必要物資追加</a></li>
-              <li><a href="/support_list">支援してくれる人一覧</a></li>
+              <li><a href="/support_list">支援者一覧</a></li>
+              <li><a href="/shelter/chat_list">チャット</a></li>
             <% else %>
-              <li><a href="/user/item_list">支援表明物資一覧</a></li>
+              <li><a href="/user/item_list">支援物資一覧</a></li>
+              <li><a href="/user/chat_list">チャット</a></li>
             <% end %>
             <li><a href="/show/shelters">登録避難所一覧</a></li>
-            <li><a href="/show_items">現在の登録物資一覧</a></li>
+            <li><a href="/show_items">登録物資一覧</a></li>
             <li><a href="/signout">ログアウト</a></li>
           <% end %>
-          
         </ul>
-      </div>
-    </div>
-  </nav>
+      </nav>
+    <!-- </div> -->
+  <!-- </nav> -->
 </header>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$(function() {
+    $('#navToggle').click(function(){//headerに .openNav を付加・削除
+        $('header').toggleClass('openNav');
+    });
+});
+</script>
 
 
 

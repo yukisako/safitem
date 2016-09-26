@@ -1,14 +1,15 @@
 #top_cover_box {
     width: 100%;
-    min-width: 900px;
+    /*min-width: 900px;*/
     height: 360px;
     background: url("../images/cover.png") no-repeat;
     background-position: center center;
     background-size: 100%;
+    z-index: 2;
 }
 
 #top_cover {
-    width: 1020px;
+    /*width: 1020px;*/
     height: 360px;
     margin: 0 auto;
     position: relative;
@@ -20,7 +21,7 @@
     top:20%;
     left:50%;
     font: Helvetica;
-    font-size: 3em;
+    font-size: 2.5em;
     -webkit-transform: translate(-50%,-50%);
     -moz-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
@@ -31,7 +32,7 @@
     position:absolute;
     top:40%;
     left:50%;
-    font-size: 2em;
+    font-size: 1.5em;
     -webkit-transform: translate(-50%,-50%);
     -moz-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
@@ -56,4 +57,30 @@
     -webkit-transform: translate(-50%,-50%);
     -moz-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
+}
+
+@media(max-width:991px){
+    #top_cover_box{
+        background: #FC919E;
+    }
+    #top_cover{
+        margin-top: 20px;
+        background: url("../images/cover.png") no-repeat;
+        background-position: center center;
+        background-size: 100%;
+    }
+    #top_cover h1{
+        font-size: 2em;
+    }
+    #top_cover a.signup-shelter{
+        position:absolute;
+        top:80%;
+        left:50%;
+    }
+    #top_cover a.signup-user{
+        position:absolute;
+        top:65%;
+        left:50%;
+    }
+
 }

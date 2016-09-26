@@ -3,27 +3,26 @@
   <h2><span class="label label-lg thema-color">登録されている避難所一覧</span></h2>
 </div>
 
-
 <div class="container-inner inner-default clearfix">
-<% @shelters.each do |shelter| %>
+  <% @shelters.each do |shelter| %>
   <div class="item-box">
-<!--     <div class="shelter-info">
+    <!--
+    <div class="shelter-info">
         <h2><span class="label label-lg thema-color"><%= shelter.shelter_name %></span></h2>
         <a href="/shelter_items/<%= shelter.id %>">必要物資一覧ページヘ</a>
-        
-    </div> -->
+    </div>
+    -->
     <div class="shelter-detail">
-        <h2><span class="label thema-color shelter-name"><%= shelter.shelter_name %></span></h2>
+      <h2><span class="label thema-color shelter-name"><%= shelter.shelter_name %></span></h2>
         
 
       <p><span class="glyphicon glyphicon-home"></span> <%= shelter.home_adress %></p>
-        <p><span class="glyphicon glyphicon-envelope"></span> <%= shelter.email %></p>
-        <p><span class="glyphicon glyphicon-earphone"></span> <%= shelter.phone %></p>
-        <p><span class="glyphicon glyphicon-user"></span> <%= shelter.representative_name %></p>
-        <a href="/shelter_items/<%= shelter.id %>">必要物資一覧ページヘ</a>
+      <p><span class="glyphicon glyphicon-envelope"></span> <%= shelter.email %></p>
+      <p><span class="glyphicon glyphicon-earphone"></span> <%= shelter.phone %></p>
+      <p><span class="glyphicon glyphicon-user"></span> <%= shelter.representative_name %></p>
+      <a href="/shelter_items/<%= shelter.id %>">必要物資一覧ページヘ</a>
     </div>
   </div>
-
   <% end %>
 </div>
 

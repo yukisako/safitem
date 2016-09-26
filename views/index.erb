@@ -40,7 +40,7 @@
                     <input type="submit" value="支援する" class="btn btn-warning">
                   </form>
                 <% elsif session[:type]  == "shelter"%>
-                    <form action="/add_want" method="post">
+                  <form action="/add_want" method="post">
                     <%# hiddenを使うよりいい方法ありそう %>
                     <input type="hidden" name="back_id" value="<%= session[:shelter_id]%>" />
                     <input type="hidden" name="name" value="<%= item.name%>" />
@@ -56,11 +56,11 @@
           </div>
         </div>
         <div class="detail shelter-count">
-              <!-- <p>避難所名:<% item.shelters.each do |shelter|%><span><%= shelter.shelter_name %></span> <%end%>
-              </p> -->
-              <p><%= item.shelters.count%>つの避難所が求めています<span>
-              <p class="title">物資名:<%= item.name%></p>
-              <p class="price">値段: <%= item.price %>円</p>
+          <!-- <p>避難所名:<% item.shelters.each do |shelter|%><span><%= shelter.shelter_name %></span> <%end%>
+          </p> -->
+          <p><%= item.shelters.count%>つの避難所が求めています<span>
+          <p class="title">物資名:<%= item.name%></p>
+          <p class="price">値段: <%= item.price %>円</p>
         </div>
       </div>  
     <% end %>

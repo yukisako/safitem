@@ -30,12 +30,12 @@
           </div>
         </div>
         <div class="detail shelter-count">
-              <!-- <p>避難所名:<% item.shelters.each do |shelter|%><span><%= shelter.shelter_name %></span> <%end%>
-              </p> -->
-              <% users = ShelterItem.find_by(item_id: item.id, shelter_id: @shelter.id).users.all %>
-              <p><%= users.count %>人が支援意思あり</p>
-              <p class="title">物資名:<%= item.name%></p>
-              <p class="price">値段: <%= item.price %>円</p>
+          <!-- <p>避難所名:<% item.shelters.each do |shelter|%><span><%= shelter.shelter_name %></span> <%end%>
+          </p> -->
+          <% users = ShelterItem.find_by(item_id: item.id, shelter_id: @shelter.id).users.all %>
+          <p><%= users.count %>人が支援意思あり</p>
+          <p class="title">物資名:<%= item.name%></p>
+          <p class="price">値段: <%= item.price %>円</p>
         </div>
       </div>  
     <% end %>
