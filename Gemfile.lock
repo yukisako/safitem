@@ -42,7 +42,7 @@ GEM
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
-    pg (0.19.0)
+    pg (0.18.4)
     pkg-config (1.1.7)
     rack (1.6.4)
     rack-protection (1.5.3)
@@ -89,7 +89,7 @@ DEPENDENCIES
   cloudinary
   dotenv
   nokogiri
-  pg
+  pg (~> 0.18.4)
   rake
   rakuten_web_service
   sinatra
