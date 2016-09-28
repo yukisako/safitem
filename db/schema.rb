@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160624010258) do
+ActiveRecord::Schema.define(version: 20160817144122) do
+
+  create_table "chats", force: :cascade do |t|
+    t.integer  "shelter_id"
+    t.integer  "user_id"
+    t.string   "from"
+    t.string   "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "items", force: :cascade do |t|
     t.string   "name"

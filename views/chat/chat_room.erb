@@ -1,0 +1,58 @@
+<style type="text/css">
+/*最低限のデザイン*/
+	#chat_space{
+		margin: 10px 0;
+		max-height: 350px;
+		overflow: scroll;
+	}
+	.time{
+		font-size: 0.5em;
+		color: #aaa;
+	}
+	#chat_content{
+		display: block;
+	}
+	.btn-primary{
+		margin: 10px 0;
+	}
+</style>
+<div class="col-sm-12 page-head">
+  <h2><span class="label label-lg thema-color"><%= @myself %>さんと<%= @pertner %>さんのチャットルーム</span></h2>
+</div><!-- この辺にチャットリストに戻るボタン要る？ -->
+<!-- チャット履歴の表示 -->
+<div id="chat_space">
+	<div class="list-group">
+		<% @chats.each do |chat| %>
+			<!-- 自分のチャットは水色で相手はねずみ色
+			jsとか使ったらもうちょっとスマートに書ける気がする-->
+			<% if chat.from == session[:type] %>
+				<div class="panel panel-info">
+				  <div class="panel-heading">
+				    <h4 class="panel-title">
+				    <%= @myself %>  <span class="time"><%= chat.created_at.localtime("+09:00").strftime("%H:%M") %></span>
+				    </h4>
+				  </div>
+				  <div class="panel-body"><%= chat.body %></div>
+				</div>
+			<% else %>
+				<div class="panel panel-default">
+				  <div class="panel-heading">
+				    <h4 class="panel-title">
+				    <%= @pertner %> <span class="time"><%= chat.created_at.localtime("+09:00").strftime("%H:%M") %></span>
+				    </h4>
+				  </div>
+				  <div class="panel-body"><%= chat.body %></div>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+</div>
+<!-- チャットを入力，送信 -->
+<form method="post" action="/new">
+	<textarea name="body" rows="5" cols="50" wrap="hard" id="chat_content"></textarea>
+	<input type="hidden" name="shelter_id" value="<%= @shelter.id %>">
+	<input type="hidden" name="user_id" value="<%= @user.id %>">
+	<input type="hidden" name="from" value="<%= session[:type] %>">
+	<input type="submit" value="送信" class="btn btn-primary">
+</form>
+<!-- たくさんやり取りする可能性があるなら，チャットルーム開いたときに最初に最新のチャット見れるようにする処理いると思う．スクロールの開始位置を最下部にするとか -->

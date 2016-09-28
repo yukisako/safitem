@@ -46,3 +46,6 @@ class UserItem < ActiveRecord::Base
   belongs_to :shelter_item
 end
 
+class Chat < ActiveRecord::Base
+  # バリデーションつけようね
+end

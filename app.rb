@@ -226,3 +226,59 @@ post '/support/delete/:id' do
   UserItem.find_by(shelter_item_id: params[:id], user_id: session[:user]).destroy
   redirect '/user/item_list'
 end
+
+# チャット機能
+## 避難所チャットリスト
+get '/shelter/chat_list' do
+  # 支援表明してる人をリストとしてあげる
+  @shelter = Shelter.find(session[:shelter])
+  shelter_id = @shelter.id
+  shelter_item = ShelterItem.find_by(shelter_id: shelter_id)
+  @users = shelter_item.users.all
+  erb :'/chat/shelter_chat_list'
+end
+
+## ユーザチャットリスト
+get '/user/chat_list' do
+  # 支援表明している避難所をリストとしてあげる
+  @user = User.find(session[:user])
+  @shelter_items = @user.shelter_items
+  @shelter_ids = []
+  @shelter_items.each do |item|
+    @shelter_ids.append(item.shelter_id)
+  end
+  @shelter_ids.uniq!
+    erb :'/chat/user_chat_list'
+end
+
+## チャットルーム
+get '/chat_room/:id' do
+  # この辺もうちょっとなんとかならないですかね
+  if session[:type] == "shelter"
+    @shelter = Shelter.find(session[:shelter])
+    @user = User.find(params[:id])
+    @myself = @shelter.shelter_name
+    @pertner = @user.user_name
+  else 
+    @shelter = Shelter.find(params[:id])
+    @user = User.find(session[:user])
+    @myself = @user.user_name
+    @pertner = @shelter.shelter_name
+  end
+  @chats = Chat.where(:shelter_id => @shelter.id, :user_id => @user.id).order("id asc").all
+  erb :'/chat/chat_room'
+end
+
+## チャットの送信
+post '/new' do
+  Chat.create(:shelter_id => params[:shelter_id],
+              :user_id => params[:user_id],
+              :from => params[:from],
+              :body => params[:body])
+  if session[:type] == "shelter"
+    id = params[:user_id]
+  else 
+    id = params[:shelter_id]
+  end
+  redirect "/chat_room/#{id}"
+end
