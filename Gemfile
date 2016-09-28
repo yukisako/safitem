@@ -10,7 +10,13 @@ gem 'cloudinary'
 
 gem 'dotenv'
 
-gem 'sqlite3'
-
 gem 'bcrypt'
 gem 'rakuten_web_service'
+
+group :development do
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
+end
