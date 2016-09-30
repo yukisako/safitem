@@ -3,17 +3,16 @@
 </div>
 
 <div>
-<ul class="list-group">
-	<% if @users.nil? %>
-		<p style="color:#aaa;padding-left:30px;">ユーザがあなたの避難所に支援表明をすると，そのユーザとチャットすることができるようになります</p>
-	<% else %>
+<% if @users.nil? %>
+	<p style="color:#aaa;padding-left:30px;">ユーザがあなたの避難所に支援表明をすると，そのユーザとチャットすることができるようになります</p>
+<% else %>
+	<ul class="list-group">
 		<% @users.each do |user| %>
 			<li class="list-group-item">
             	<a href="/chat_room/<%= user.id %>"><%= user.user_name %></a>
         	</li>
 		<% end %>
-	<% end %>
-
-</ul>
+	</ul>
+<% end %>
 </div>
 <!-- 余裕があれば通知機能とかも作りたい感ある -->
