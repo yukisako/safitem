@@ -251,7 +251,9 @@ get '/shelter/chat_list' do
   @shelter = Shelter.find(session[:shelter])
   shelter_id = @shelter.id
   shelter_item = ShelterItem.find_by(shelter_id: shelter_id)
-  @users = shelter_item.users.all
+  if shelter_item != nil
+    @users = shelter_item.users.all
+  end 
   erb :'/chat/shelter_chat_list'
 end
 

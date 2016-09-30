@@ -3,14 +3,18 @@
 </div>
 
 <div>
-<ul class="list-group">
-    <% @shelter_ids.each do |shelter_id| %>
-        <% shelter = Shelter.find(shelter_id) %> 
-        <li class="list-group-item">
-            <a href="/chat_room/<%= shelter.id %>"><%= shelter.shelter_name %></a>
-        </li>
-    <% end %>
-</ul>
+<% if @shelter_ids.empty? %>
+	<p style="color:#aaa;padding-left:30px;">
+	支援表明するとその避難所とチャットすることができるようになります</p>
+<% else %>
+	<ul class="list-group">
+	    <% @shelter_ids.each do |shelter_id| %>
+	        <% shelter = Shelter.find(shelter_id) %> 
+	        <li class="list-group-item">
+	            <a href="/chat_room/<%= shelter.id %>"><%= shelter.shelter_name %></a>
+	        </li>
+	    <% end %>
+	</ul>
 </div>
-<!-- 余裕があれば通知機能とかも作りたい感ある
-     表示するリストがないときに「支援表明するとその避難所とチャットすることができるようになります」的な説明文を表示するとわかりやすいかもしれない -->
+<% end %>
+<!-- 余裕があれば通知機能とかも作りたい感ある -->
