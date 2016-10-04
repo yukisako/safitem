@@ -1,0 +1,19 @@
+.table{
+	background-color: #fff;
+	margin-top: 20px;
+
+}
+
+thead th{
+	background-color: #fde1ee;
+}
+
+#sum{
+	float: right;
+}
+
+#sum-price{
+	font-size: 30px;
+	color: red;
+	margin: 0 20px;
+}
