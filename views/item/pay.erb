@@ -6,7 +6,7 @@
 
 
 <div class="container-inner inner-default clearfix">
-  <table border="1">
+  <table class="table">
     <thead>
       <tr>
       <th >商品名</th>
@@ -37,5 +37,5 @@
     <% end %>
     </tbody>
   </table>
-  <p>合計金額: <%= @sum %>円</p>
+  <p id="sum">合計金額: <span id="sum-price"><%= @sum %>円</span></p>
 </div>

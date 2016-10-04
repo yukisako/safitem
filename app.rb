@@ -177,6 +177,9 @@ post '/pay' do
   p params
 end
 
+get '/user/pay_fin' do
+  erb :'item/pay_fin'
+end
 
 
 #避難所のみの処理
