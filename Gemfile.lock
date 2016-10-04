@@ -79,6 +79,8 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
+    webpay (3.2.3)
+      faraday (~> 0.9)
 
 PLATFORMS
   ruby
@@ -96,6 +98,7 @@ DEPENDENCIES
   sinatra-activerecord
   sinatra-contrib
   sqlite3
+  webpay (~> 3.2)
 
 BUNDLED WITH
    1.10.6
