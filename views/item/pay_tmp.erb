@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="/stylesheets/list.css">
+<link rel="stylesheet" href="/stylesheets/pay.css">
+<div class="col-sm-12 page-head">
+  <h2><span class="label label-lg thema-color"><%= @user.user_name %>の支援表明一覧</span></h2>
+</div>
+
+
+<div class="container-inner inner-default clearfix">
+  <table border="1">
+    <thead>
+      <tr>
+      <th >商品名</th>
+      <th >寄付先</th>
+      <th >値段</th>
+      <th > 詳細</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @shelter_items.each do |shelter_item| %>
+      <% item = Item.find(shelter_item.item_id) %>
+      <% shelter = Shelter.find(shelter_item.shelter_id) %>
+        <tr>
+          <td>
+          <% if item.name.length > 20 %>
+          <%= item.name.slice!(0...20) + "..." %>
+          <% else %>
+          <%= item.name.slice!(0...20) unless item.name.length > 10%>
+          <% end %>
+          </td> 
+          <td><%= shelter.shelter_name %>に寄付</td>
+          <td><%= item.price %>円</td>
+          <% @sum += item.price.to_i %><%#ここめっちゃ汚い処理(ActiveRecordの機能使うかなんとかするべき%>
+          <% if session[:type] !=nil %>
+            <td><a href="<%=item.item_url%>" target="_blank">詳細</a></td>
+          <% end %>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <p>合計金額: <%= @sum %>円</p>
+</div>
+
+<form action="/pay" method="post">
+  <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_118eMJ5aegjJcuZ0wU3Ec7jb" data-lang="ja"></script>
+  <input type="hidden" name="pay_price" value="<%=@sum%>" />
+</form>

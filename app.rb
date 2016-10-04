@@ -167,14 +167,21 @@ get '/user/pay' do
     @sum = 0
     #このshelter_itemsに入ってるのはidだけ
     #ここ汚い処理してる
-    erb :'item/pay'
+    erb :'item/pay_tmp'
   else
     redirect '/'
   end
 end
 
 post '/pay' do
-  p params
+  webpay = WebPay.new('test_secret_78B9iMcnyeoz8wx3aJ2lm0uF')
+
+  webpay.charge.create(
+    amount:   params["pay_price"],
+    currency: "jpy",
+    card: params["webpay-token"]
+  )
+  redirect '/'
 end
 
 
