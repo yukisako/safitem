@@ -1,3 +1,16 @@
+<% if /成功/ =~ session[:alert] %>
+<div class="alert alert-success" role="alert">
+    <button class="close" data-dismiss="alert">&times;</button>
+    <%= session[:alert] %>
+</div>
+<% elsif /失敗/ =~ session[:alert] %>
+<div class="alert alert-warning" role="alert">
+    <button class="close" data-dismiss="alert">&times;</button>
+    <%= session[:alert] %>
+</div>
+<% end %>
+<% clear_alert %>
+
 <div id="top_cover_box">
   <div id="top_cover">
     <h1>物資支援サービス Safitem</h1>
