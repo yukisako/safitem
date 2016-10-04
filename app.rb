@@ -21,6 +21,11 @@ end
 
 #登録とかログイン，ログアウト周り
 ##ユーザの新規登録，
+
+def clear_alert()
+  session[:alert] = nil
+end
+
 get '/user/signup' do
   erb :'/login/user/sign_up'
 end
@@ -40,6 +45,9 @@ post '/user/signup' do
   if @user.persisted?
     session[:user] = @user.id
     session[:type] = "user"
+    session[:alert] = "ユーザ新規登録が成功しました"
+  else
+    session[:alert] = "ユーザ新規登録が失敗しました"
   end
 
   redirect '/'
@@ -55,6 +63,9 @@ post '/user/signin' do
   if user && user.authenticate(params[:password])
     session[:user] = user.id
     session[:type] = "user"
+    session[:alert] = "ログインに成功しました"
+  else
+    session[:alert] = "ログインに失敗しました"
   end
   redirect '/'
 end
@@ -79,6 +90,9 @@ post '/shelter/signup' do
   if @shelter.persisted?
     session[:shelter] = @shelter.id
     session[:type] = "shelter"
+    session[:alert] = "避難所新規登録に成功しました"
+  else
+    session[:alert] = "避難所新規登録に失敗しました"
   end
 
   redirect '/'
@@ -94,6 +108,9 @@ post '/shelter/signin' do
   if shelter && shelter.authenticate(params[:password])
     session[:shelter] = shelter.id
     session[:type] = "shelter"
+    session[:alert] = "ログインに成功しました"
+  else
+    session[:alert] = "ログインに失敗しました"
   end
 
   redirect '/'
@@ -234,7 +251,9 @@ get '/shelter/chat_list' do
   @shelter = Shelter.find(session[:shelter])
   shelter_id = @shelter.id
   shelter_item = ShelterItem.find_by(shelter_id: shelter_id)
-  @users = shelter_item.users.all
+  if shelter_item != nil
+    @users = shelter_item.users.all
+  end 
   erb :'/chat/shelter_chat_list'
 end
 
