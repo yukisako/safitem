@@ -167,7 +167,7 @@ get '/user/pay' do
     @sum = 0
     #このshelter_itemsに入ってるのはidだけ
     #ここ汚い処理してる
-    erb :'item/pay_tmp'
+    erb :'item/pay'
   else
     redirect '/'
   end
@@ -181,7 +181,7 @@ post '/pay' do
     currency: "jpy",
     card: params["webpay-token"]
   )
-  redirect '/'
+  redirect '/user/pay_fin'
 end
 
 get '/user/pay_fin' do

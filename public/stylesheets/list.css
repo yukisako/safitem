@@ -112,3 +112,9 @@ div.buttons form{
   display: inline-block;
   margin: 5px;
 }
+
+
+h2{
+  display: inline-block;
+  margin: 15px 5px 5px 5px;
+}

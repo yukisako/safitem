@@ -8,7 +8,7 @@ thead th{
 	background-color: #fde1ee;
 }
 
-#sum{
+.sum{
 	float: right;
 }
 
@@ -17,3 +17,16 @@ thead th{
 	color: red;
 	margin: 0 20px;
 }
+
+  p.thx{
+    margin: 30px;
+    text-align: center;
+  }
+  .thx img{
+    height: 100px;
+  }
+
+  .backbtn{
+    text-align: center;
+    margin: 15px 10px 40px 10px;
+  }
