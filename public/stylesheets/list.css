@@ -17,8 +17,8 @@
 }
 
 .item-box .image .img-wrap {
-  width: 250px;
-  height: 255px;
+  width: 250px ;
+  height: 255px! important;
   padding: 10px;
   display: table-cell;
   vertical-align: middle;
