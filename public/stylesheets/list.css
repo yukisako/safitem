@@ -17,8 +17,8 @@
 }
 
 .item-box .image .img-wrap {
-  width: 250px;
-  height: 255px;
+  width: 250px ;
+  height: 259px! important;
   padding: 10px;
   display: table-cell;
   vertical-align: middle;
@@ -111,4 +111,10 @@ div.buttons form{
 .want-list-btn{
   display: inline-block;
   margin: 5px;
+}
+
+
+h2{
+  display: inline-block;
+  margin: 15px 5px 5px 5px;
 }
