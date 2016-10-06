@@ -21,6 +21,11 @@ end
 
 #登録とかログイン，ログアウト周り
 ##ユーザの新規登録，
+
+def clear_alert()
+  session[:alert] = nil
+end
+
 get '/user/signup' do
   erb :'/login/user/sign_up'
 end
@@ -40,6 +45,9 @@ post '/user/signup' do
   if @user.persisted?
     session[:user] = @user.id
     session[:type] = "user"
+    session[:alert] = "ユーザ新規登録が成功しました"
+  else
+    session[:alert] = "ユーザ新規登録が失敗しました"
   end
 
   redirect '/'
@@ -55,6 +63,9 @@ post '/user/signin' do
   if user && user.authenticate(params[:password])
     session[:user] = user.id
     session[:type] = "user"
+    session[:alert] = "ログインに成功しました"
+  else
+    session[:alert] = "ログインに失敗しました"
   end
   redirect '/'
 end
@@ -79,6 +90,9 @@ post '/shelter/signup' do
   if @shelter.persisted?
     session[:shelter] = @shelter.id
     session[:type] = "shelter"
+    session[:alert] = "避難所新規登録に成功しました"
+  else
+    session[:alert] = "避難所新規登録に失敗しました"
   end
 
   redirect '/'
@@ -94,6 +108,9 @@ post '/shelter/signin' do
   if shelter && shelter.authenticate(params[:password])
     session[:shelter] = shelter.id
     session[:type] = "shelter"
+    session[:alert] = "ログインに成功しました"
+  else
+    session[:alert] = "ログインに失敗しました"
   end
 
   redirect '/'
@@ -131,11 +148,44 @@ end
 #ユーザのみの処理
 ##そのユーザが支援表明している物資一覧表示
 get '/user/item_list' do
-  @user = User.find(session[:user])
-  @shelter_items = @user.shelter_items.all
-  #このshelter_itemsに入ってるのはidだけ
-  #ここ汚い処理してる
-  erb :'item/item_list'
+  if session[:user]
+    @user = User.find(session[:user])
+    @shelter_items = @user.shelter_items.all
+    #このshelter_itemsに入ってるのはidだけ
+    #ここ汚い処理してる
+    erb :'item/item_list'
+  else
+    redirect '/'
+  end
+end
+
+##決算画面
+get '/user/pay' do
+  if session[:user]
+    @user = User.find(session[:user])
+    @shelter_items = @user.shelter_items.all
+    @sum = 0
+    #このshelter_itemsに入ってるのはidだけ
+    #ここ汚い処理してる
+    erb :'item/pay'
+  else
+    redirect '/'
+  end
+end
+
+post '/pay' do
+  webpay = WebPay.new('test_secret_78B9iMcnyeoz8wx3aJ2lm0uF')
+
+  webpay.charge.create(
+    amount:   params["pay_price"],
+    currency: "jpy",
+    card: params["webpay-token"]
+  )
+  redirect '/user/pay_fin'
+end
+
+get '/user/pay_fin' do
+  erb :'item/pay_fin'
 end
 
 
@@ -227,6 +277,9 @@ post '/support/delete/:id' do
   redirect '/user/item_list'
 end
 
+
+
+
 # チャット機能
 ## 避難所チャットリスト
 get '/shelter/chat_list' do
@@ -234,7 +287,9 @@ get '/shelter/chat_list' do
   @shelter = Shelter.find(session[:shelter])
   shelter_id = @shelter.id
   shelter_item = ShelterItem.find_by(shelter_id: shelter_id)
-  @users = shelter_item.users.all
+  if shelter_item != nil
+    @users = shelter_item.users.all
+  end 
   erb :'/chat/shelter_chat_list'
 end
 
@@ -259,7 +314,7 @@ get '/chat_room/:id' do
     @user = User.find(params[:id])
     @myself = @shelter.shelter_name
     @pertner = @user.user_name
-  else 
+  else
     @shelter = Shelter.find(params[:id])
     @user = User.find(session[:user])
     @myself = @user.user_name
@@ -282,3 +337,4 @@ post '/new' do
   end
   redirect "/chat_room/#{id}"
 end
+
